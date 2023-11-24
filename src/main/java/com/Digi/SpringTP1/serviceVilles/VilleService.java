@@ -1,6 +1,6 @@
 package com.Digi.SpringTP1.serviceVilles;
 
-import com.Digi.SpringTP1.dataVille.Ville;
+import com.Digi.SpringTP1.data.Ville;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.Digi.SpringTP1.controleurVilles;
 
-import com.Digi.SpringTP1.dataVille.Ville;
+import com.Digi.SpringTP1.data.Ville;
 import com.Digi.SpringTP1.serviceVilles.VilleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
