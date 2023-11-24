@@ -1,4 +1,4 @@
-package com.Digi.SpringTP1.Service;
+package com.Digi.SpringTP1.ServiceHello;
 
 import org.springframework.stereotype.Service;
 

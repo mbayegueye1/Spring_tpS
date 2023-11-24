@@ -1,5 +1,4 @@
 package com.Digi.SpringTP1.data;
-
 import java.io.Serializable;
 public class Ville implements Serializable{
     private String nomVille;

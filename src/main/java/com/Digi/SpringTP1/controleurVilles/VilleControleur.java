@@ -17,8 +17,8 @@ public class VilleControleur {
         this.villeService = villeservice;
     }
     @GetMapping("/villesList")
-    public List<Ville> getUsers(){
-        return this.villeService.getAllUsers();
+    public List<Ville> getVille(){
+        return this.villeService.getAllVilles();
     }
 
 

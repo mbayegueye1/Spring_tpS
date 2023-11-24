@@ -10,11 +10,12 @@ import java.util.List;
 public class VilleService {
     public VilleService() {
     }
-    public List<Ville> getAllUsers(){
+    public List<Ville> getAllVilles(){
         List<Ville> villes = new ArrayList();
         villes.add(new Ville("Montpellier"));
         villes.add(new Ville("Paris"));
         villes.add(new Ville("Besancon"));
+        villes.add(new Ville("Marseille"));
         return villes;
 
     }
