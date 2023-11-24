@@ -12,7 +12,7 @@ public class HelloControleur {
     @Autowired
     private HelloService helloService;
 
-
+    @GetMapping("/direhello")
     public String direHello(){
         return helloService.salutations();
     }
