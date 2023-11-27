@@ -36,15 +36,27 @@ public class VilleControleur {
 
     @PutMapping
     public String insererVille(@RequestBody Ville nvVille) {
-        if (!listvilles.contains((nvVille.getId()))) {
-            listvilles.add(nvVille);
-            return "Succus creat ville";
+        for(Ville villeajoute  :listvilles) {
+            if (villeajoute.getId() == nvVille.getId()) {
+                return "ville existe";
+            }
         }
-        return "ville existe";
+        listvilles.add(nvVille);
+        return "ville ajouté";
     }
+    @PostMapping("/{id}")
+    public String villeModifier(@PathVariable long id, @RequestBody Ville ville) {
+        for (Ville v : listvilles) {
+            if (v.getId() == id) {
+                v.setNomVille(ville.getNomVille());
+                return "modif ok";
 
-    @GetMapping("/{id}/modifier")
-    public Ville getIdmodifier(@PathVariable int id) {
+            }
+        }
+        return null;
+    }
+    @GetMapping("/{id}")
+    public Ville getIdelete(@PathVariable int id) {
         return listvilles.remove(id);
     }
 
