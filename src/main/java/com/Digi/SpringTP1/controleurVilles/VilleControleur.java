@@ -4,6 +4,7 @@ import com.Digi.SpringTP1.data.Ville;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 @RestController
 @RequestMapping("/villes")
@@ -56,18 +57,25 @@ public class VilleControleur {
         return null;
     }
     @DeleteMapping ("/{id}")
-    public Ville deleteId(@PathVariable int id) {
-        for (Ville v : listvilles) {
+    public String  deleteId(@PathVariable long id) {
+        if (id <= 0) {
+            return "id pas correct";
+        }
+        Iterator<Ville> iterVilles = listvilles.iterator();
+
+        while (iterVilles.hasNext()) {
+            Ville v = iterVilles.next();
             if (v.getId() == id) {
-                return listvilles.remove(id);
-
+                iterVilles.remove();
+                return "modif ville okk";
             }
+        }
 
-    }
+
         return null;
+    }
 
 }
 
 
-}
 
