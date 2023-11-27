@@ -55,10 +55,19 @@ public class VilleControleur {
         }
         return null;
     }
-    @GetMapping("/{id}")
-    public Ville getIdelete(@PathVariable int id) {
-        return listvilles.remove(id);
+    @DeleteMapping ("/{id}")
+    public Ville deleteId(@PathVariable int id) {
+        for (Ville v : listvilles) {
+            if (v.getId() == id) {
+                return listvilles.remove(id);
+
+            }
+
     }
+        return null;
+
+}
+
 
 }
 
