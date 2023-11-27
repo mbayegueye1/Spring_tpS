@@ -63,7 +63,7 @@ public class VilleControleur {
     }
     @DeleteMapping ("/{id}")
     public ResponseEntity<String> deleteId(@PathVariable long id) {
-        if (id <= 0) {
+        if (id == 0) {
             return ResponseEntity.badRequest().body("id pas correct");
         }
         Iterator<Ville> iterVilles = listvilles.iterator();
