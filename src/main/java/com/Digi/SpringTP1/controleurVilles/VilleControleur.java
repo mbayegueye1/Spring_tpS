@@ -1,6 +1,7 @@
 package com.Digi.SpringTP1.controleurVilles;
 
 import com.Digi.SpringTP1.data.Ville;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ public class VilleControleur {
     }
 
     @GetMapping("/{id}")
+
     public Ville getIdVille(@PathVariable int id) {
+
         for (Ville VilleTrouvee : listvilles) {
             if (VilleTrouvee.getId() == id) {
                 return VilleTrouvee;
@@ -36,30 +39,32 @@ public class VilleControleur {
     }
 
     @PutMapping
-    public String insererVille(@RequestBody Ville nvVille) {
+    public ResponseEntity<String> insererVille(@RequestBody Ville nvVille) {
         for(Ville villeajoute  :listvilles) {
             if (villeajoute.getId() == nvVille.getId()) {
-                return "ville existe";
+                return ResponseEntity.badRequest().body("ville existe");
             }
         }
         listvilles.add(nvVille);
-        return "ville ajouté";
+        return ResponseEntity.ok("ville ajouté");
     }
     @PostMapping("/{id}")
-    public String villeModifier(@PathVariable long id, @RequestBody Ville ville) {
+    public ResponseEntity<String> villeModifier(@PathVariable long id, @RequestBody Ville ville) {
+        if (id <= 0) {
+            return ResponseEntity.badRequest().body("id pas correct");
+        }
         for (Ville v : listvilles) {
             if (v.getId() == id) {
                 v.setNomVille(ville.getNomVille());
-                return "modif ok";
-
+                return ResponseEntity.ok("modif ok");
             }
         }
         return null;
     }
     @DeleteMapping ("/{id}")
-    public String  deleteId(@PathVariable long id) {
+    public ResponseEntity<String> deleteId(@PathVariable long id) {
         if (id <= 0) {
-            return "id pas correct";
+            return ResponseEntity.badRequest().body("id pas correct");
         }
         Iterator<Ville> iterVilles = listvilles.iterator();
 
@@ -67,11 +72,9 @@ public class VilleControleur {
             Ville v = iterVilles.next();
             if (v.getId() == id) {
                 iterVilles.remove();
-                return "modif ville okk";
+                return ResponseEntity.ok("modif ville okk");
             }
         }
-
-
         return null;
     }
 
