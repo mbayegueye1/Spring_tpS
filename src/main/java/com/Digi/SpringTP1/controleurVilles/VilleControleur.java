@@ -37,7 +37,6 @@ public class VilleControleur {
         }
         return null;
     }
-
     @PutMapping
     public ResponseEntity<String> insererVille(@RequestBody Ville nvVille) {
         for(Ville villeajoute  :listvilles) {
