@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 @RestController
 @RequestMapping("/villes")
 public class VilleControleur {
@@ -19,37 +18,36 @@ public class VilleControleur {
 
     @GetMapping
     public List<Ville> getVille() {
-
         return villeService.extractAll();
     }
 
-    @PutMapping
+    @GetMapping("/{id}")
+    public List<Ville> getIdVille(@PathVariable long id) {
+        return villeService.extractById(id);
+    }
+
+    @GetMapping("/nomVille")
+    public List<Ville> getByNomVille(@RequestParam String nomVille) {
+        return villeService.extractByNom(nomVille);
+    }
+
+    @PostMapping
     public ResponseEntity<String> insertVille(@RequestBody Ville nvVille) {
         villeService.insert(nvVille);
-        return ResponseEntity.badRequest().body("ville existe");
+        return ResponseEntity.created(null).body("Ville ajoutée avec succès");
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<String> modiVille(@PathVariable long id, @RequestBody Ville nomVille) {
+        villeService.modifierVille(id, nomVille);
+        return ResponseEntity.ok("Ville modifiée avec succès");
+    }
 
-    public List<Ville> getIdVille(@PathVariable long id) {
-        return villeService.extratbyId(id);
-    }
-    @GetMapping("/nomVille")
-    public List<Ville> getByNomVille(@RequestBody String nomVille) {
-        return villeService.extratbyNom(nomVille);
-    }
-    @PostMapping
-    public ResponseEntity<String> modiVille(@PathVariable long id,@RequestBody Ville nomVille) {
-        villeService.modifierVille(id,nomVille);
-        return ResponseEntity.badRequest().body("ville modifié");
-    }
     @DeleteMapping
-    public ResponseEntity<String> supprimVille(@RequestBody Ville nomVille) {
+    public ResponseEntity<String> supprimVille(@RequestBody String nomVille) {
         villeService.supprimerVille(nomVille);
-        return ResponseEntity.badRequest().body("ville modifié");
+        return ResponseEntity.ok("Ville supprimée avec succès");
     }
-
-
 }
 
    /* ***** TP5
