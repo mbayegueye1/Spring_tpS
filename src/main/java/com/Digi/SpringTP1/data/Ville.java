@@ -1,16 +1,24 @@
 package com.Digi.SpringTP1.data;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+@Entity
 public class Ville  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="NOM")
     private String nomVille;
+
+
 
     public Ville() {
     }
 
-    public Ville(int id, String nomVille) {
-        this.id = id;
+    public Ville( String nomVille) {
+
         this.nomVille = nomVille;
     }
 

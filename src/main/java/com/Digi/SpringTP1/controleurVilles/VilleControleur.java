@@ -1,16 +1,61 @@
 package com.Digi.SpringTP1.controleurVilles;
 
 import com.Digi.SpringTP1.data.Ville;
+import com.Digi.SpringTP1.data.VilleDao;
+import com.Digi.SpringTP1.serviceVilles.VilleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/villes")
 public class VilleControleur {
-    ArrayList<Ville> listvilles = new ArrayList<>();
+    @Autowired
+    private VilleService villeService;
+
+    @GetMapping
+    public List<Ville> getVille() {
+
+        return villeService.extractAll();
+    }
+
+    @PutMapping
+    public ResponseEntity<String> insertVille(@RequestBody Ville nvVille) {
+        villeService.insert(nvVille);
+        return ResponseEntity.badRequest().body("ville existe");
+    }
+
+    @GetMapping("/{id}")
+
+    public List<Ville> getIdVille(@PathVariable long id) {
+        return villeService.extratbyId(id);
+    }
+    @GetMapping("/nomVille")
+    public List<Ville> getByNomVille(@RequestBody String nom) {
+        return villeService.extratbyNom(nom);
+    }
+    @PostMapping
+    public ResponseEntity<String> modiVille(@PathVariable long id,@RequestBody Ville nvVille) {
+        villeService.modifierVille(id,nvVille);
+        return ResponseEntity.badRequest().body("ville modifié");
+    }
+    @DeleteMapping
+    public ResponseEntity<String> supprimVille(@RequestBody Ville nvVille) {
+        villeService.supprimerVille(nvVille);
+        return ResponseEntity.badRequest().body("ville modifié");
+    }
+
+
+}
+
+   /* ***** TP5
+
+
+   ArrayList<Ville> listvilles = new ArrayList<>();
 
     public VilleControleur() {
 
@@ -76,8 +121,8 @@ public class VilleControleur {
         }
         return null;
     }
+*/
 
-}
 
 
 
