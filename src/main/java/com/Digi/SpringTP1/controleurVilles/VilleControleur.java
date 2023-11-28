@@ -35,17 +35,17 @@ public class VilleControleur {
         return villeService.extratbyId(id);
     }
     @GetMapping("/nomVille")
-    public List<Ville> getByNomVille(@RequestBody String nom) {
-        return villeService.extratbyNom(nom);
+    public List<Ville> getByNomVille(@RequestBody String nomVille) {
+        return villeService.extratbyNom(nomVille);
     }
     @PostMapping
-    public ResponseEntity<String> modiVille(@PathVariable long id,@RequestBody Ville nvVille) {
-        villeService.modifierVille(id,nvVille);
+    public ResponseEntity<String> modiVille(@PathVariable long id,@RequestBody Ville nomVille) {
+        villeService.modifierVille(id,nomVille);
         return ResponseEntity.badRequest().body("ville modifié");
     }
     @DeleteMapping
-    public ResponseEntity<String> supprimVille(@RequestBody Ville nvVille) {
-        villeService.supprimerVille(nvVille);
+    public ResponseEntity<String> supprimVille(@RequestBody Ville nomVille) {
+        villeService.supprimerVille(nomVille);
         return ResponseEntity.badRequest().body("ville modifié");
     }
 

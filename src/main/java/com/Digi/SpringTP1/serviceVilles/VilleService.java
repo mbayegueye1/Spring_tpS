@@ -18,9 +18,9 @@ public class VilleService {
         TypedQuery<Ville> query = em.createQuery("SELECT v FROM Ville v WHERE v.id = :id", Ville.class);
         return query.getResultList();
     }
-    public void insert(Ville nvVille){
+    public void insert(Ville nomVille){
 
-        em.persist(nvVille);
+        em.persist(nomVille);
     }
     public List<Ville> extratbyId(long id){
         TypedQuery<Ville> query2 = em.createQuery("SELECT v FROM Ville v", Ville.class);
