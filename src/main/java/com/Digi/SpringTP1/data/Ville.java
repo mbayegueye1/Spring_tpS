@@ -5,15 +5,15 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 @Entity
 @Table(name = "VILLE")
-public class Ville  {
+public class Ville implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+
     private String nomVille;
-    @Column
+
     private int nbrHabitants;
-    @Column
+
     private String codeDept;
     /*@ManyToOne
     @JoinColumn(name = "idDept")*/
