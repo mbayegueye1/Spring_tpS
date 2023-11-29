@@ -4,20 +4,33 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 @Entity
+@Table(name = "VILLE")
 public class Ville  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name="NOM")
+    @Column
     private String nomVille;
-
-
+    @Column
+    private int nbrHabitants;
+    @Column
+    private String codeDept;
+    /*@ManyToOne
+    @JoinColumn(name = "idDept")*/
+    /*private Departement departement;*/
 
     public Ville() {
     }
 
-    public Ville( String nomVille) {
+    /*public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+*/
+    public Ville(String nomVille) {
 
         this.nomVille = nomVille;
     }
@@ -36,6 +49,22 @@ public class Ville  {
 
     public void setNomVille(String nomVille) {
         this.nomVille = nomVille;
+    }
+
+    public int getNbrHabitants() {
+        return nbrHabitants;
+    }
+
+    public String getCodeDept() {
+        return codeDept;
+    }
+
+    public void setCodeDept(String codeDept) {
+        this.codeDept = codeDept;
+    }
+
+    public void setNbrHabitants(int nbrHabitants) {
+        this.nbrHabitants = nbrHabitants;
     }
 
     @Override

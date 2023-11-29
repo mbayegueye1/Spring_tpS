@@ -2,6 +2,8 @@ package com.Digi.SpringTP1.controleurVilles;
 
 import com.Digi.SpringTP1.data.Ville;
 import com.Digi.SpringTP1.data.VilleDao;
+import com.Digi.SpringTP1.exception.ExceptionError;
+import com.Digi.SpringTP1.repository.VilleRepository;
 import com.Digi.SpringTP1.serviceVilles.VilleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ public class VilleControleur {
     }
 
     @GetMapping("/{id}")
-    public List<Ville> getIdVille(@PathVariable long id) {
+    public List<Ville> getIdVille(@PathVariable int id) {
         return villeService.extractById(id);
     }
 
@@ -32,9 +34,14 @@ public class VilleControleur {
     }
 
     @PostMapping
-    public ResponseEntity<String> insertVille(@RequestBody Ville nvVille) {
-        villeService.insert(nvVille);
-        return ResponseEntity.created(null).body("Ville ajoutée avec succès");
+    public ResponseEntity<String> insertVille(@RequestBody Ville ville, @PathVariable int nbrHabitants, @RequestBody String codeDept) throws ExceptionError {
+        ville.setNbrHabitants(nbrHabitants);
+        ville.setCodeDept(codeDept);
+        if(ville.getNomVille().length() < 2 ){
+            return ResponseEntity.created(null).body("Ajouter nom complet");
+        }
+        villeService.insert(ville);
+        return ResponseEntity.ok("Ville ajoutée avec succès");
     }
 
     @PutMapping("/{id}")
@@ -48,7 +55,12 @@ public class VilleControleur {
         villeService.supprimerVille(nomVille);
         return ResponseEntity.ok("Ville supprimée avec succès");
     }
+/// Extraire les villes d'un  departement///
+
+    //@GetMapping//
+
 }
+
 
    /* ***** TP5
 

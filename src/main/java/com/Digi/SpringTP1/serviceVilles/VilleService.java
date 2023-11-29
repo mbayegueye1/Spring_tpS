@@ -15,8 +15,9 @@ public class VilleService {
     @Autowired
     private EntityManager em;
 
-    @Transactional
+
     public List<Ville> extractAll() {
+
         TypedQuery<Ville> query = em.createQuery("SELECT v FROM Ville v", Ville.class);
         return query.getResultList();
     }
@@ -27,7 +28,8 @@ public class VilleService {
     }
 
     @Transactional
-    public List<Ville> extractById(long id) {
+    public List<Ville> extractById(int id) {
+
         TypedQuery<Ville> query = em.createQuery("SELECT v FROM Ville v WHERE v.id = :id", Ville.class);
         query.setParameter("id", id);
         return query.getResultList();
@@ -35,7 +37,7 @@ public class VilleService {
 
     @Transactional
     public List<Ville> extractByNom(String nomVille) {
-        TypedQuery<Ville> query = em.createQuery("SELECT v FROM Ville v WHERE v.nom = :nom", Ville.class);
+        TypedQuery<Ville> query = em.createQuery("SELECT v FROM Ville v WHERE v.nom = "+nomVille+"'", Ville.class);
         query.setParameter("nom", nomVille);
         return query.getResultList();
     }
@@ -55,4 +57,11 @@ public class VilleService {
             em.remove(ville);
         }
     }
+
+    /*@Transactional
+    public void List<Departement> extrairVilleDept(Ville ville){
+        TypedQuery<Departement> query = em.createQuery("SELECT v FROM Ville v", Departement.class);
+        return query.getResultList()
+    }*/
+
 }
